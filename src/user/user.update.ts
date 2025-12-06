@@ -1,7 +1,7 @@
-import { UpdateHandler } from "src/custom/handlers.custom";
-import { UserService } from "./user.service";
-import { Ctx, Help, Start } from "nestjs-telegraf";
-import { type TgContext } from "src/types/global.types";
+import { UpdateHandler } from 'src/custom/handlers.custom';
+import { UserService } from './user.service';
+import { Ctx, Help, Start } from 'nestjs-telegraf';
+import { type TgContext } from 'src/types/global.types';
 
 @UpdateHandler()
 export class UserUpdate {

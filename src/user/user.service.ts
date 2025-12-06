@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { APP_COMMAND_DATA } from 'src/constants/command.const';
 import { APP_DESCRIPTION } from 'src/constants/description.const';
 import { TgContext } from 'src/types/global.types';
 
+@Injectable()
 export class UserService {
   async start(ctx: TgContext) {
     await ctx.reply(APP_DESCRIPTION);

@@ -7,8 +7,9 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get<ConfigService>(ConfigService);
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
-  app.use(helmet());
+ //app.use(helmet());
 
   const PORT = config.get<number>('PORT') ?? 5001;
   await app.listen(PORT, () => {

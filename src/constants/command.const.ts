@@ -25,3 +25,10 @@ export const PAYMENT_COMMAND_DATA: BotCommand[] = [
     description: 'Покинуть режим',
   },
 ];
+
+export const AI_COMMAND_DATA: BotCommand[] = [
+  {
+    command: 'exit',
+    description: 'Покинуть режим',
+  },
+];

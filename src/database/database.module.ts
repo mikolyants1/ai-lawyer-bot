@@ -1,6 +1,6 @@
 import { Global, Logger, Module, OnModuleInit } from '@nestjs/common';
 import { DATABASE } from './consts/database.const';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import { databaseSchema } from './database.schema';
@@ -16,6 +16,7 @@ import { Database } from './types/database.types';
         const pool = new Pool({ connectionString });
         return drizzle(pool, { schema: databaseSchema }) as Database;
       },
+      inject: [ConfigService],
     },
   ],
   exports: [DATABASE],
