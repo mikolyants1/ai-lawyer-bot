@@ -19,9 +19,9 @@ const embeddings = new OpenAIEmbeddings({
 });
 
 const llm = new ChatOpenAI({
-  model: 'x-ai/grok-4.1-fast:free',
+  model: 'openai/gpt-oss-20b:free',
   temperature: 0.3,
-  apiKey: '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',
+  apiKey: OPENROUTER_KEY,
   configuration: {
     baseURL: 'https://openrouter.ai/api/v1',
   },
@@ -40,7 +40,7 @@ const main = async () => {
 
   const pineconeTool = tool(
     async ({ query }) => {
-      const retriever = store.asRetriever({ k: 3 });
+      const retriever = store.asRetriever({ k: 5 });
       const result = await retriever.invoke(query);
       return result.map(d => d.pageContent).join('\n\n');
     },
@@ -56,6 +56,7 @@ const main = async () => {
   const agent = createAgent({
     model: llm,
     tools: [pineconeTool],
+    systemPrompt: '',
   });
   const answer = await agent.invoke({
     messages: [new HumanMessage('how old trump ?')],

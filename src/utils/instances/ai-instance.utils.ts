@@ -31,9 +31,9 @@ export class AiInstance {
   static getLlm() {
     if (!this.llm) {
       this.llm = new ChatOpenAI({
-        model: EModel.CHAT_GPT_4_MINI,
+        model: EModel.CHAT_GPT_OSS,
         temperature: 0.3,
-        apiKey: process.env.OPENROUTER_KEY!,
+        apiKey: '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',
         configuration: {
           baseURL: 'https://openrouter.ai/api/v1',
         },
@@ -45,8 +45,8 @@ export class AiInstance {
   static getEmbedding() {
     if (!this.embeddings) {
       this.embeddings = new OpenAIEmbeddings({
-        model: EModel.OPENAI_TEXT_EMBEDDING_3_SMALL,
-        apiKey: process.env.OPENROUTER_KEY!,
+        model: EModel.QWEN_EMBEDDING,
+        apiKey: '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',
         configuration: {
           baseURL: 'https://openrouter.ai/api/v1',
         },

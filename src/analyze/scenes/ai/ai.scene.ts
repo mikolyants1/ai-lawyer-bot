@@ -15,6 +15,7 @@ export class AiScene {
 
   @SceneEnter()
   async openScene(@Ctx() ctx: TgContext) {
+    this.aiService.clearState(ctx);
     return this.sceneService.sendDescription(ctx);
   }
 
@@ -35,11 +36,13 @@ export class AiScene {
 
   @Command(ECommand.EXIT)
   async exitScene(@Ctx() ctx: TgContext) {
+    this.aiService.clearState(ctx);
     return this.sceneService.exitScene(ctx);
   }
 
   @SceneLeave()
   async sceneLeave(@Ctx() ctx: TgContext) {
+    this.aiService.clearState(ctx);
     return this.sceneService.leaveHandler(ctx);
   }
 }

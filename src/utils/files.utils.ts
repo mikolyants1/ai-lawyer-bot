@@ -3,7 +3,7 @@ import { EFileFormat } from 'src/analyze/enums/format.enum';
 import { TgContext } from 'src/types/global.types';
 import { writeFile } from 'fs/promises';
 import { FORMAT_DATA } from 'src/data/format.data';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, promises } from 'fs';
 
 export class FileUtils {
   private static readonly uploadPath = join(__dirname, '..', '..', '..', 'uploads');
@@ -22,9 +22,9 @@ export class FileUtils {
   static getFormat(filename: string, mimeType: string) {
     let format: EFileFormat | null = null;
     const ext = extname(filename).toLowerCase();
-    //   if (mimeType.startsWith('text/') || ext === '.txt') {
-    //  format = EFileFormat.TXT;
-    if (mimeType === 'application/pdf' || ext === '.pdf') {
+    if (mimeType.startsWith('text/') || ext === '.txt') {
+      format = EFileFormat.TXT;
+    } else if (mimeType === 'application/pdf' || ext === '.pdf') {
       format = EFileFormat.PDF;
     } else if (mimeType.includes('word') || ext === '.docx') {
       format = EFileFormat.DOCX;
@@ -45,6 +45,7 @@ export class FileUtils {
   static async execText(format: EFileFormat, filePath: string) {
     const doc = await FORMAT_DATA[format!](filePath);
     const load = await doc.load();
+    await promises.rm(filePath);
     return load.map(doc => doc.pageContent).join('\n\n');
   }
 }

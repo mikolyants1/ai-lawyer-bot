@@ -2,7 +2,7 @@ import { TEnum } from 'src/types/global.types';
 
 export const EFileFormat = {
   PDF: 'PDF',
-//  TXT: 'TXT',
+  TXT: 'TXT',
   DOCX: 'DOCX',
 } as const;
 

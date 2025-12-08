@@ -12,7 +12,7 @@ export class ApiAdminController {
     return this.service.uploadToStore();
   }
 
-   @Post('index/stats')
+  @Post('index/stats')
   @UseGuards(ApiAdminGuard)
   async getIndexStats() {
     return this.service.getStats();

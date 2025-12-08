@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IAnswerState } from '../interfaces/state.interface';
+import { IAnswerState } from '../interfaces/answer-state.interface';
 import { State } from 'src/utils/state/state.utils';
 
 @Injectable()

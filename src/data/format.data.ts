@@ -9,4 +9,8 @@ export const FORMAT_DATA = {
     const { DocxLoader } = await import('@langchain/community/document_loaders/fs/docx');
     return new DocxLoader(filePath);
   },
+  [EFileFormat.TXT]: async (filePath: string) => {
+    const { TextLoader } = await import('@langchain/classic/document_loaders/fs/text');
+    return new TextLoader(filePath);
+  },
 } as const;

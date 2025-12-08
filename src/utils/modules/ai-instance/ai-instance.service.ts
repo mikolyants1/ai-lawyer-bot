@@ -5,6 +5,8 @@ import { PineconeStore } from '@langchain/pinecone';
 import { AiInstance } from 'src/utils/instances/ai-instance.utils';
 import { PineconeTool } from './tools/pinecone.tool';
 import { LAW_INDEX } from '../indexes/consts/index.const';
+import { JsonOutputParser } from '@langchain/core/output_parsers';
+import { SYSTEM_LAW_PROMPT } from './utils/prompt.utils';
 
 @Injectable()
 export class AInstanceService {
@@ -31,11 +33,13 @@ export class AInstanceService {
     if (!this.agent) {
       const store = await this.getPineconeStore(LAW_INDEX);
       const pineconeTool = await this.pineconeTool.getTool(store);
+      const model = AiInstance.getLlm();
+      model.pipe(new JsonOutputParser());
+
       this.agent = createAgent({
-        model: AiInstance.getLlm(),
+        model,
         tools: [pineconeTool],
-        systemPrompt:
-          'You are a helpful assistant. Use the following context to answer the question.',
+        systemPrompt: SYSTEM_LAW_PROMPT,
       });
     }
     return this.agent;

@@ -10,6 +10,8 @@ import { AiService } from './scenes/ai/ai.service';
 import { IndexModule } from 'src/utils/modules/indexes/index.module';
 import { AInstanceModule } from 'src/utils/modules/ai-instance/ai-instance.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { AnalysisState } from './state/analysis.state';
+import { StatusState } from './state/status.state';
 
 @Module({
   imports: [IndexModule, AInstanceModule, AuthModule],
@@ -19,6 +21,8 @@ import { AuthModule } from 'src/auth/auth.module';
     AnalysisService,
     AnalysisUpdate,
     SceneUtilsService,
+    AnalysisState,
+    StatusState,
     SceneOptions.getProvider({
       commands: AI_COMMAND_DATA,
       description: AI_DESCRIPTION,

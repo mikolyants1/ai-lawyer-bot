@@ -3,12 +3,9 @@ export interface IRisk {
   quote: string;
 }
 
-export interface IAmbiguities {
-  issue: string;
-  quote: string;
-}
+export interface IAmbiguities extends IRisk {}
 
-export interface ILegalIssues extends IAmbiguities {}
+export interface ILegalIssues extends IRisk {}
 
 export interface IRecommendation {
   problem: string;
